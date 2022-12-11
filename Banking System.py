@@ -35,10 +35,10 @@ class Accounts:
         self._balance += amount
         now = datetime.now()
         dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
-        transaction_id = str(self._fname[0])+str(id(self))
-        confirmation_code = str('D-'+str(id(self))+'-'+str(''.join(c for c in dt_string if c in digits))+'-'+str(transaction_id))
+        transaction_id = str(self._fname[0])+str(self.id)
+        confirmation_code = str('D-'+str(self.id)+'-'+str(''.join(c for c in dt_string if c in digits))+'-'+str(transaction_id))
         transaction = {str(confirmation_code):{'id': transaction_id,
-                        'time': now.strftime("%d/%m/%Y %H:%M:%S"), 'amount': amount,'account_id':id(self)}}
+                        'time': now.strftime("%d/%m/%Y %H:%M:%S"), 'amount': amount,'account_id':self.id}}
         f = open('transactions.txt', 'a')
         f.write('\n')
         f.write(json.dumps(transaction))
@@ -47,10 +47,10 @@ class Accounts:
         if self._balance - amount < 0:
             now = datetime.now()
             dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
-            transaction_id = str(self._fname[0])+str(id(self))
-            confirmation_code = str('X-'+str(id(self))+'-'+str(''.join(c for c in dt_string if c in digits))+'-'+str(transaction_id))
+            transaction_id = str(self._fname[0])+str(self.id)
+            confirmation_code = str('X-'+str(self.id)+'-'+str(''.join(c for c in dt_string if c in digits))+'-'+str(transaction_id))
             transaction = {str(confirmation_code):{'id': transaction_id,
-                            'time': now.strftime("%d/%m/%Y %H:%M:%S"), 'amount': amount,'account_id':id(self)}}
+                            'time': now.strftime("%d/%m/%Y %H:%M:%S"), 'amount': amount,'account_id':self.id}}
             f = open('transactions.txt', 'a')
             f.write('\n')
             f.write(json.dumps(transaction))
@@ -59,10 +59,10 @@ class Accounts:
             self._balance -= amount
             now = datetime.now()
             dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
-            transaction_id = str(self._fname[0])+str(id(self))
-            confirmation_code = str('W-'+str(id(self))+'-'+str(''.join(c for c in dt_string if c in digits))+'-'+str(transaction_id))
+            transaction_id = str(self._fname[0])+str(self.id)
+            confirmation_code = str('W-'+str(self.id)+'-'+str(''.join(c for c in dt_string if c in digits))+'-'+str(transaction_id))
             transaction = {str(confirmation_code):{'id': transaction_id,
-                            'time': now.strftime("%d/%m/%Y %H:%M:%S"), 'amount': amount,'account_id':id(self)}}
+                            'time': now.strftime("%d/%m/%Y %H:%M:%S"), 'amount': amount,'account_id':self.id}}
             f = open('transactions.txt', 'a')
             f.write('\n')
             f.write(json.dumps(transaction))
@@ -72,11 +72,11 @@ class Accounts:
         now = datetime.now()
         now = datetime.now()
         dt_string = now.strftime("%d/%m/%Y %H:%M:%S")
-        transaction_id = str(self._fname[0])+str(id(self))
+        transaction_id = str(self._fname[0])+str(self.id)
         confirmation_code = str('I-'+str(id(self))+'-'+str(''.join(c for c in dt_string if c in digits))+'-'+str(transaction_id))
         transaction = {str(confirmation_code):{'id': transaction_id,
                         'time': now.strftime("%d/%m/%Y %H:%M:%S"),
-                         'amount': self._balance*self._interest,'account_id':id(self)}}
+                         'amount': self._balance*self._interest,'account_id':(self.id)}}
         f = open('transactions.txt', 'a')
         f.write('\n')
         f.write(json.dumps(transaction))
